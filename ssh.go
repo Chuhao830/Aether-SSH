@@ -66,6 +66,34 @@ func (m *SSHManager) Connect(sessionId string, conn Connection) error {
 		Auth:            authMethods,
 		HostKeyCallback: ssh.InsecureIgnoreHostKey(),
 		Timeout:         10 * time.Second,
+		Config: ssh.Config{
+			KeyExchanges: []string{
+				"curve25519-sha256",
+				"curve25519-sha256@libssh.org",
+				"ecdh-sha2-nistp256",
+				"ecdh-sha2-nistp384",
+				"ecdh-sha2-nistp521",
+				"diffie-hellman-group14-sha256",
+				"diffie-hellman-group14-sha1",
+				"diffie-hellman-group1-sha1",
+			},
+			Ciphers: []string{
+				"aes128-gcm@openssh.com",
+				"aes256-gcm@openssh.com",
+				"chacha20-poly1305@openssh.com",
+				"aes128-ctr",
+				"aes192-ctr",
+				"aes256-ctr",
+				"aes128-cbc",
+				"3des-cbc",
+			},
+			MACs: []string{
+				"hmac-sha2-256-etm@openssh.com",
+				"hmac-sha2-256",
+				"hmac-sha1",
+				"hmac-sha1-96",
+			},
+		},
 	}
 
 	target := fmt.Sprintf("%s:%d", conn.Host, conn.Port)
