@@ -47,6 +47,14 @@ func (m *SSHManager) Connect(sessionId string, conn Connection) error {
 	var authMethods []ssh.AuthMethod
 	if conn.AuthMethod == "password" {
 		authMethods = append(authMethods, ssh.Password(conn.Password))
+		// 同时支持 keyboard-interactive（OpenSSH 10.0+ 可能优先使用）
+		authMethods = append(authMethods, ssh.KeyboardInteractive(func(name, instruction string, questions []string, echos []bool) ([]string, error) {
+			answers := make([]string, len(questions))
+			for i := range questions {
+				answers[i] = conn.Password
+			}
+			return answers, nil
+		}))
 	} else if conn.AuthMethod == "privateKey" {
 		var signer ssh.Signer
 		var err error
