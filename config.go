@@ -9,6 +9,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"strings"
 	"time"
 
 	"github.com/studio-b12/gowebdav"
@@ -36,7 +37,17 @@ type ConfigManager struct {
 
 func NewConfigManager() *ConfigManager {
 	appData, _ := os.UserConfigDir()
-	dir := filepath.Join(appData, "Aether", "config")
+
+	// 检查是否有自定义数据目录
+	markerPath := filepath.Join(appData, "Aether", "custom_data_dir.txt")
+	baseDir := appData
+	if data, err := os.ReadFile(markerPath); err == nil {
+		customBase := strings.TrimSpace(string(data))
+		if customBase != "" {
+			baseDir = customBase
+		}
+	}
+	dir := filepath.Join(baseDir, "Aether", "config")
 
 	// ── 自动数据迁移逻辑（AetherSSH -> Aether） ──
 	oldDir := filepath.Join(appData, "AetherSSH")
@@ -373,4 +384,34 @@ func (c *ConfigManager) RestoreFromWebdavFile(filename string) (map[string]inter
 	return map[string]interface{}{
 		"success": true,
 	}, nil
+}
+
+// MigrateToCustomDir 将用户数据迁移到自定义目录
+func (c *ConfigManager) MigrateToCustomDir(newBase string) error {
+	newDir := filepath.Join(newBase, "Aether", "config")
+	if err := os.MkdirAll(newDir, 0755); err != nil {
+		return fmt.Errorf("无法创建目录: %v", err)
+	}
+
+	// 复制所有文件到新目录
+	files := []string{"connections.json", "webdav.json", "aether.key"}
+	for _, f := range files {
+		src := filepath.Join(c.configDir, f)
+		dst := filepath.Join(newDir, f)
+		if _, err := os.Stat(src); err == nil {
+			data, err := os.ReadFile(src)
+			if err != nil {
+				return err
+			}
+			if err := os.WriteFile(dst, data, 0600); err != nil {
+				return err
+			}
+		}
+	}
+
+	// 保存自定义路径标记到原目录（下次启动读取）
+	appData, _ := os.UserConfigDir()
+	markerPath := filepath.Join(appData, "Aether", "custom_data_dir.txt")
+	os.MkdirAll(filepath.Dir(markerPath), 0755)
+	return os.WriteFile(markerPath, []byte(newBase), 0644)
 }

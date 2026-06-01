@@ -232,8 +232,13 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
   const [language, setLanguage] = useState(localStorage.getItem('appLanguage') || 'zh-CN');
   const [appFont, setAppFont] = useState(localStorage.getItem('appFont') || 'system-ui');
   const [termFontSize, setTermFontSize] = useState(parseInt(localStorage.getItem('termFontSize') || '13', 10));
+  const [dataDir, setDataDir] = useState('加载中...');
 
   const t = I18N[language] || I18N['zh-CN'];
+
+  useEffect(() => {
+    AppGo.GetDataDir().then(dir => setDataDir(dir)).catch(() => setDataDir('获取失败'));
+  }, []);
 
   // Shortcuts state
   const defaultShortcuts = {
@@ -823,7 +828,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                           position: 'absolute', 
                           left: useCustomAccent ? 18 : 2, 
                           top: 1, width: 20, height: 20, 
-                          background: '#fff', borderRadius: '50%',
+                          background: '#fff', borderRadius: 0,
                           transition: 'left 0.2s cubic-bezier(0.4, 0, 0.2, 1)',
                           boxShadow: '0 1px 3px rgba(0,0,0,0.4)'
                         }}></div>
@@ -921,6 +926,27 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
 
             {activeTab === 'sync' && (
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 600 }}>
+                <div>
+                  <h3 style={{ fontSize: 14, color: 'var(--text-1)', marginBottom: 12, fontWeight: 600 }}>用户数据目录</h3>
+                  <div className="form-group" style={{ background: 'var(--bg-2)', padding: 16, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    <div style={{ fontSize: 12, color: 'var(--text-4)' }}>当前存储路径（包含连接信息、密钥等）</div>
+                    <div style={{ fontFamily: 'var(--font-mono)', fontSize: 12, color: 'var(--text-2)', background: 'var(--bg-3)', padding: '8px 12px', border: '1px solid var(--border)', wordBreak: 'break-all' }}>{dataDir}</div>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button className="btn btn-secondary btn-sm" onClick={() => AppGo.OpenDataDirInExplorer()}>📂 打开目录</button>
+                      <button className="btn btn-secondary btn-sm" onClick={async () => {
+                        const newDir = prompt('输入新的数据存储根目录（如 D:\\MyData）：');
+                        if (!newDir) return;
+                        try {
+                          await AppGo.SetCustomDataDir(newDir);
+                          addToast('数据目录已更改，重启后生效', 'success');
+                        } catch(e) {
+                          addToast('更改失败: ' + e, 'error');
+                        }
+                      }}>📁 更改目录</button>
+                    </div>
+                    <div style={{ fontSize: 11, color: 'var(--text-4)' }}>⚠️ 更改目录后需重启软件生效，现有数据会自动复制到新目录</div>
+                  </div>
+                </div>
                 <div style={{ background: 'var(--bg-2)', padding: 24, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
                     <div style={{ width: 40, height: 40, borderRadius: 0, background: 'var(--bg-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>☁️</div>

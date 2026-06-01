@@ -36,15 +36,33 @@ jobs:
       - name: Build portable exe
         run: wails build -clean -platform windows/amd64 -webview2 embed
 
-      - name: Upload to existing latest-build release
+      - name: Package as zip
+        run: |
+          New-Item -ItemType Directory -Force -Path release
+          Copy-Item build\bin\Aether.exe release\Aether.exe
+          Compress-Archive -Path release\* -DestinationPath Aether-Windows-Portable.zip -Force
+        shell: pwsh
+
+      - name: Get short SHA
+        id: sha
+        run: echo "sha=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
+        shell: pwsh
+
+      - name: Delete existing release tag
+        run: git push origin :refs/tags/portable-latest 2>$null; exit 0
+        shell: pwsh
+
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: portable-latest
           name: "Aether 直角版 便携 (最新)"
           body: |
             ✅ 直角界面 · 透明背景Logo · Windows 便携版
-            📦 下载 Aether.exe 直接双击运行，无需安装
-          files: build/bin/Aether.exe
+            📦 下载 zip 解压后直接双击 Aether.exe 运行，无需安装
+            💾 用户数据默认在 %AppData%\Aether\config，可在设置→同步与云中自定义
+            🔨 构建: ${{ steps.sha.outputs.sha }}
+          files: Aether-Windows-Portable.zip
           make_latest: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

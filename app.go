@@ -308,3 +308,17 @@ func (a *App) UpdateApp(downloadUrl string, filename string) error {
 	os.Exit(0)
 	return nil
 }
+
+func (a *App) GetDataDir() string {
+	return a.configManager.configDir
+}
+
+func (a *App) OpenDataDirInExplorer() error {
+	dir := filepath.Dir(a.configManager.configDir)
+	cmd := exec.Command("explorer", dir)
+	return cmd.Start()
+}
+
+func (a *App) SetCustomDataDir(newDir string) error {
+	return a.configManager.MigrateToCustomDir(newDir)
+}
