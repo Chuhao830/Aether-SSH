@@ -1,0 +1,52 @@
+name: Build Windows Portable
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.21'
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Wails
+        run: go install github.com/wailsapp/wails/v2/cmd/wails@latest
+
+      - name: Install frontend deps
+        working-directory: frontend
+        run: npm install
+
+      - name: Build portable exe
+        run: wails build -clean -platform windows/amd64
+
+      - name: Upload portable exe
+        uses: actions/upload-artifact@v4
+        with:
+          name: Aether-Windows-Portable
+          path: build/bin/Aether.exe
+
+      - name: Create Release
+        if: github.ref == 'refs/heads/main'
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: latest-build
+          name: "Aether (最新构建)"
+          body: "直角界面版 · 透明背景Logo · Windows 便携版（无需安装，直接运行）"
+          files: build/bin/Aether.exe
+          make_latest: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
