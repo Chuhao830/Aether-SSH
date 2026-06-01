@@ -33,28 +33,29 @@ jobs:
         working-directory: frontend
         run: npm install
 
-      - name: Build portable exe
-        run: wails build -clean -platform windows/amd64
+      - name: Build portable exe (embed WebView2 bootstrap)
+        run: wails build -clean -platform windows/amd64 -webview2 embed
 
       - name: Get short SHA
         id: sha
         run: echo "sha=$(git rev-parse --short HEAD)" >> $env:GITHUB_OUTPUT
-
-      - name: Delete existing latest-build tag
-        run: |
-          git tag -d latest-build 2>$null || true
-          git push origin :refs/tags/latest-build 2>$null || true
         shell: pwsh
 
-      - name: Create Release with exe
+      - name: Delete existing release tag
+        run: |
+          git push origin :refs/tags/latest-build 2>$null
+          exit 0
+        shell: pwsh
+
+      - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: latest-build
           name: "Aether 直角版 (便携)"
           body: |
             ✅ 直角界面 · 透明背景Logo · Windows 便携版
-            📦 下载 `Aether.exe` 直接双击运行，无需安装
-            🔨 构建自: ${{ steps.sha.outputs.sha }}
+            📦 下载 Aether.exe 直接双击运行，无需安装
+            🔨 构建: ${{ steps.sha.outputs.sha }}
           files: build/bin/Aether.exe
           make_latest: true
         env:
