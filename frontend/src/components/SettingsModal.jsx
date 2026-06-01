@@ -231,6 +231,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
   const [useCustomAccent, setUseCustomAccent] = useState(localStorage.getItem('useCustomAccent') === 'true');
   const [language, setLanguage] = useState(localStorage.getItem('appLanguage') || 'zh-CN');
   const [appFont, setAppFont] = useState(localStorage.getItem('appFont') || 'system-ui');
+  const [termFontSize, setTermFontSize] = useState(parseInt(localStorage.getItem('termFontSize') || '13', 10));
 
   const t = I18N[language] || I18N['zh-CN'];
 
@@ -321,6 +322,13 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
     setLanguage(lang);
     setGlobalLanguage(lang);
     addToast(lang === 'zh-CN' ? '语言已切换至 简体中文' : 'Language switched to English', 'success');
+  };
+
+  const handleTermFontSizeChange = (val) => {
+    const size = Math.min(24, Math.max(10, val));
+    setTermFontSize(size);
+    localStorage.setItem('termFontSize', size);
+    window.dispatchEvent(new CustomEvent('termFontSizeChange', { detail: size }));
   };
 
   const handleFontChange = (e) => {
@@ -759,6 +767,24 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                 </div>
 
                 <div>
+                  <h3 style={{ fontSize: 14, color: 'var(--text-1)', marginBottom: 12, fontWeight: 600 }}>终端字体大小</h3>
+                  <div className="form-group" style={{ background: 'var(--bg-2)', padding: 16, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16 }}>
+                      <div>
+                        <div style={{ color: 'var(--text-1)', fontSize: 13 }}>终端字号</div>
+                        <div style={{ color: 'var(--text-4)', fontSize: 11 }}>调整终端文字大小（10–24px）</div>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                        <button onClick={() => handleTermFontSizeChange(termFontSize - 1)} style={{ width: 28, height: 28, background: 'var(--bg-3)', border: '1px solid var(--border)', color: 'var(--text-1)', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>−</button>
+                        <span style={{ fontFamily: 'var(--font-mono)', fontSize: 14, color: 'var(--text-1)', minWidth: 28, textAlign: 'center' }}>{termFontSize}</span>
+                        <button onClick={() => handleTermFontSizeChange(termFontSize + 1)} style={{ width: 28, height: 28, background: 'var(--bg-3)', border: '1px solid var(--border)', color: 'var(--text-1)', cursor: 'pointer', fontSize: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>+</button>
+                      </div>
+                    </div>
+                    <input type="range" min="10" max="24" step="1" value={termFontSize} onChange={e => handleTermFontSizeChange(parseInt(e.target.value))} style={{ width: '100%', marginTop: 12 }} />
+                  </div>
+                </div>
+
+                <div>
                   <h3 style={{ fontSize: 14, color: 'var(--text-1)', marginBottom: 12, fontWeight: 600 }}>{t.appearance.themeTitle}</h3>
                   <div className="form-group" style={{ background: 'var(--bg-2)', padding: 16, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
@@ -806,7 +832,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                     <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
                       {['#3b82f6','#8b5cf6','#d946ef','#f43f5e','#f97316','#eab308','#84cc16','#10b981','#06b6d4','#64748b'].map((color, i) => (
                         <div key={i} onClick={() => handleColorChange(color)} style={{ 
-                          width: 24, height: 24, borderRadius: '50%', background: color, cursor: 'pointer',
+                          width: 24, height: 24, borderRadius: 0, background: color, cursor: 'pointer',
                           border: themeAccent === color ? '2px solid #fff' : 'none',
                           boxShadow: themeAccent === color ? `0 0 0 2px ${color}` : 'none'
                         }} />

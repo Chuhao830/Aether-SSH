@@ -44,7 +44,7 @@ export default function Terminal({ sessionId, status, isActive, serverName }) {
     const term = new XTerm({
       theme:            XTERM_THEME,
       fontFamily:       "'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace",
-      fontSize:         13,
+      fontSize:         parseInt(localStorage.getItem('termFontSize') || '13', 10),
       lineHeight:       1.5,
       letterSpacing:    0.3,
       cursorBlink:      true,
@@ -175,6 +175,19 @@ export default function Terminal({ sessionId, status, isActive, serverName }) {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, [isActive]);
+
+  // ── 字体大小动态变化 ────────────────────────────────────────────
+  useEffect(() => {
+    const handleFontSize = (e) => {
+      if (!termRef.current || !fitAddonRef.current) return;
+      try {
+        termRef.current.options.fontSize = e.detail;
+        fitAddonRef.current.fit();
+      } catch (_) {}
+    };
+    window.addEventListener('termFontSizeChange', handleFontSize);
+    return () => window.removeEventListener('termFontSizeChange', handleFontSize);
+  }, []);
 
   const isConnected  = status === 'connected';
   const isConnecting = status === 'connecting';
