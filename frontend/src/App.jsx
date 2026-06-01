@@ -717,12 +717,12 @@ export default function App() {
                 ].map((key, i) => (
                   <div key={i} style={{
                     display: 'flex', alignItems: 'center', gap: 12,
-                    padding: '12px 14px', borderRadius: 10,
+                    padding: '12px 14px', borderRadius: 0,
                     background: i === 0 ? 'rgba(16,185,129,0.1)' : 'var(--bg-2)',
                     border: i === 0 ? '1px solid rgba(16,185,129,0.3)' : '1px solid var(--border)',
                     cursor: 'pointer',
                   }}>
-                    <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(16,185,129,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>🔑</div>
+                    <div style={{ width: 36, height: 36, borderRadius: 0, background: 'rgba(16,185,129,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 18 }}>🔑</div>
                     <div>
                       <div style={{ fontSize: 13, fontWeight: 600, color: 'var(--text-1)', fontFamily: 'var(--font-mono)' }}>{key.path}</div>
                       <div style={{ fontSize: 11, color: 'var(--text-4)', marginTop: 2 }}>Type {key.type}</div>
@@ -775,7 +775,7 @@ export default function App() {
           background: 'rgba(0,0,0,0.55)', backdropFilter: 'blur(4px)',
         }}>
           <div style={{
-            width: 380, borderRadius: 16, overflow: 'hidden',
+            width: 380, borderRadius: 0, overflow: 'hidden',
             background: 'rgba(22,27,34,0.97)',
             border: '1px solid rgba(255,255,255,0.08)',
             boxShadow: '0 24px 60px rgba(0,0,0,0.6)',
@@ -784,7 +784,7 @@ export default function App() {
             {/* 标题行：图标 + 名称 + 按钮 */}
             <div style={{ display: 'flex', alignItems: 'flex-start', gap: 14, marginBottom: 18 }}>
               <div style={{
-                width: 42, height: 42, borderRadius: 10, flexShrink: 0,
+                width: 42, height: 42, borderRadius: 0, flexShrink: 0,
                 background: 'linear-gradient(135deg,#ef4444,#dc2626)',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontSize: 22,
@@ -800,7 +800,7 @@ export default function App() {
               <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
                 <button
                   style={{
-                    padding: '5px 14px', fontSize: 12, borderRadius: 8, cursor: 'pointer',
+                    padding: '5px 14px', fontSize: 12, borderRadius: 0, cursor: 'pointer',
                     background: 'rgba(255,255,255,0.06)', border: '1px solid rgba(255,255,255,0.12)',
                     color: '#8b949e',
                   }}
@@ -816,9 +816,9 @@ export default function App() {
               {/* 左进度点 */}
               <div style={{ width: 10, height: 10, borderRadius: '50%', background: '#22c55e', flexShrink: 0, boxShadow: '0 0 8px #22c55e' }} />
               {/* 进度条 */}
-              <div style={{ flex: 1, height: 4, borderRadius: 4, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+              <div style={{ flex: 1, height: 4, borderRadius: 0, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
                 <div style={{
-                  height: '100%', borderRadius: 4,
+                  height: '100%', borderRadius: 0,
                   background: 'linear-gradient(90deg, #22c55e, #86efac)',
                   animation: 'ssh-progress-indeterminate 1.4s ease-in-out infinite',
                 }} />
@@ -826,9 +826,9 @@ export default function App() {
               {/* WiFi 图标 */}
               <div style={{ flexShrink: 0, fontSize: 14, color: '#22c55e' }}>📡</div>
               {/* 第二段进度条 */}
-              <div style={{ flex: 1, height: 4, borderRadius: 4, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
+              <div style={{ flex: 1, height: 4, borderRadius: 0, background: 'rgba(255,255,255,0.08)', overflow: 'hidden' }}>
                 <div style={{
-                  height: '100%', borderRadius: 4,
+                  height: '100%', borderRadius: 0,
                   background: 'linear-gradient(90deg, #22c55e, #86efac)',
                   animation: 'ssh-progress-indeterminate 1.4s ease-in-out 0.4s infinite',
                 }} />
@@ -852,7 +852,7 @@ export default function App() {
           style={{
             position: 'fixed', bottom: 48, right: 16, zIndex: 8000,
             width: 280,
-            borderRadius: 14,
+            borderRadius: 0,
             background: 'rgba(13,17,23,0.97)',
             border: '1px solid rgba(255,255,255,0.1)',
             boxShadow: '0 16px 48px rgba(0,0,0,0.7)',
@@ -868,7 +868,7 @@ export default function App() {
             borderBottom: '1px solid rgba(255,255,255,0.07)',
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-              <img src={logoImg} alt="logo" style={{ width: 24, height: 24, borderRadius: 6 }} />
+              <img src={logoImg} alt="logo" style={{ width: 24, height: 24, borderRadius: 0 }} />
               <span style={{ fontSize: 14, fontWeight: 700, color: '#f0f6fc' }}>Aether</span>
             </div>
             <div style={{ display: 'flex', gap: 8 }}>
