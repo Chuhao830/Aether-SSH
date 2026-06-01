@@ -67,7 +67,7 @@ export default function FileEditor({ file, onSave, onClose }) {
                 background: 'var(--yellow-dim)',
                 color: 'var(--yellow)',
                 padding: '2px 8px',
-                borderRadius: 4,
+                borderRadius: 0,
                 fontWeight: 500,
               }}>
                 未保存
@@ -81,7 +81,7 @@ export default function FileEditor({ file, onSave, onClose }) {
               fontFamily: 'var(--font-mono)',
               background: 'var(--bg-3)',
               padding: '2px 8px',
-              borderRadius: 4,
+              borderRadius: 0,
             }}>
               {ext || 'text'}
             </span>

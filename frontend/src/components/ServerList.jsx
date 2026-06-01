@@ -140,7 +140,7 @@ export default function ServerList({
               <div style={{
                 width: 42,
                 height: 42,
-                borderRadius: 12,
+                borderRadius: 0,
                 background: osInfo.bg,
                 display: 'flex',
                 alignItems: 'center',
@@ -208,7 +208,7 @@ export default function ServerList({
                     border: 'none',
                     cursor: 'pointer',
                     padding: '4px 6px',
-                    borderRadius: 6,
+                    borderRadius: 0,
                     color: isHovered ? 'var(--text-2)' : 'var(--text-4)',
                     fontSize: 14,
                     opacity: isHovered ? 1 : 0,

@@ -45,8 +45,8 @@ function CpuBar({ val = 0 }) {
   const pct = Math.min(Math.max(val, 0), 100);
   const color = pct > 80 ? '#ef4444' : pct > 50 ? '#f59e0b' : '#22c55e';
   return (
-    <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,0.07)', borderRadius: 3, overflow: 'hidden' }}>
-      <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 3, transition: 'width 0.4s ease' }} />
+    <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,0.07)', borderRadius: 0, overflow: 'hidden' }}>
+      <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 0, transition: 'width 0.4s ease' }} />
     </div>
   );
 }
@@ -58,8 +58,8 @@ function PartRow({ mount, size, avail, usedPct }) {
   return (
     <div style={{ display: 'flex', alignItems: 'center', gap: 6, padding: '4px 0', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
       <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#94a3b8', width: 60, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap', flexShrink: 0 }}>{mount}</span>
-      <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,0.07)', borderRadius: 2, overflow: 'hidden', minWidth: 30 }}>
-        <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 2 }} />
+      <div style={{ flex: 1, height: 5, background: 'rgba(255,255,255,0.07)', borderRadius: 0, overflow: 'hidden', minWidth: 30 }}>
+        <div style={{ width: `${pct}%`, height: '100%', background: color, borderRadius: 0 }} />
       </div>
       <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#64748b', width: 36, textAlign: 'right', flexShrink: 0 }}>{size}</span>
       <span style={{ fontSize: 11, fontFamily: 'var(--font-mono)', color: '#94a3b8', width: 36, textAlign: 'right', flexShrink: 0 }}>{avail}</span>
@@ -74,7 +74,7 @@ function Card({ children, style }) {
     <div style={{
       background: 'rgba(255,255,255,0.03)',
       border: '1px solid rgba(255,255,255,0.07)',
-      borderRadius: 10, padding: '10px 12px',
+      borderRadius: 0, padding: '10px 12px',
       ...style,
     }}>
       {children}
@@ -93,7 +93,7 @@ function SectionHeader({ icon, title, badge, right }) {
           fontSize: 10, fontFamily: 'var(--font-mono)', fontWeight: 600,
           color: '#22c55e', background: 'rgba(34,197,94,0.1)',
           border: '1px solid rgba(34,197,94,0.3)',
-          padding: '1px 6px', borderRadius: 4,
+          padding: '1px 6px', borderRadius: 0,
         }}>{badge}</span>
       )}
       {right}
@@ -187,20 +187,20 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
       <div style={{ display: 'flex', flexDirection: 'column', height: '100%', background: 'var(--bg-0)', position: 'relative', overflow: 'hidden' }}>
         <div style={{ position: 'absolute', inset: 0, background: 'radial-gradient(circle at 50% 35%, rgba(34,197,94,0.06) 0%, transparent 65%)', pointerEvents: 'none' }} />
         <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '20px 16px', gap: 14 }}>
-          <div style={{ width: 54, height: 54, borderRadius: 14, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>📊</div>
+          <div style={{ width: 54, height: 54, borderRadius: 0, background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 24 }}>📊</div>
           <div style={{ textAlign: 'center' }}>
             <div style={{ fontSize: 13, fontWeight: 700, color: '#e2e8f0', marginBottom: 5 }}>系统监控</div>
             <div style={{ fontSize: 10, color: '#64748b', lineHeight: 1.6, maxWidth: 190 }}>实时查看服务器 CPU、内存、网络和磁盘使用情况</div>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: 5, width: '100%', maxWidth: 200 }}>
             {[['⚡', 'CPU 每核心实时占用'], ['💾', '内存甜甜圈图分析'], ['🌐', '网络速率折线图'], ['🗄', '磁盘分区挂载表'], ['📋', '进程热点排行']].map(([icon, text]) => (
-              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 9px', borderRadius: 6, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
+              <div key={text} style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '4px 9px', borderRadius: 0, background: 'rgba(255,255,255,0.02)', border: '1px solid rgba(255,255,255,0.04)' }}>
                 <span style={{ fontSize: 11 }}>{icon}</span>
                 <span style={{ fontSize: 10, color: '#94a3b8' }}>{text}</span>
               </div>
             ))}
           </div>
-          <button onClick={() => setShowConfirm(true)} style={{ marginTop: 4, padding: '8px 22px', borderRadius: 8, border: '1px solid rgba(34,197,94,0.5)', background: 'rgba(34,197,94,0.12)', color: '#22c55e', fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.5px' }}
+          <button onClick={() => setShowConfirm(true)} style={{ marginTop: 4, padding: '8px 22px', borderRadius: 0, border: '1px solid rgba(34,197,94,0.5)', background: 'rgba(34,197,94,0.12)', color: '#22c55e', fontSize: 12, fontWeight: 700, cursor: 'pointer', letterSpacing: '0.5px' }}
             onMouseOver={e => { e.currentTarget.style.background = 'rgba(34,197,94,0.2)'; }}
             onMouseOut={e => { e.currentTarget.style.background = 'rgba(34,197,94,0.12)'; }}>
             开启监控
@@ -208,16 +208,16 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
         </div>
         {showConfirm && (
           <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.72)', backdropFilter: 'blur(6px)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 14, zIndex: 50 }}>
-            <div style={{ background: '#171e1b', border: '1px solid rgba(34,197,94,0.22)', borderRadius: 14, padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 24px 64px rgba(0,0,0,0.65)', maxWidth: 234 }}>
+            <div style={{ background: '#171e1b', border: '1px solid rgba(34,197,94,0.22)', borderRadius: 0, padding: '18px 16px', display: 'flex', flexDirection: 'column', gap: 12, boxShadow: '0 24px 64px rgba(0,0,0,0.65)', maxWidth: 234 }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-                <div style={{ width: 30, height: 30, borderRadius: 8, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>🔍</div>
+                <div style={{ width: 30, height: 30, borderRadius: 0, background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 14 }}>🔍</div>
                 <div>
                   <div style={{ fontSize: 12, fontWeight: 700, color: '#e2e8f0' }}>注入监控脚本</div>
                   <div style={{ fontSize: 9, color: '#64748b' }}>AetherSSH Probe v2</div>
                 </div>
               </div>
               <div style={{ fontSize: 10, color: '#94a3b8', lineHeight: 1.7 }}>
-                将在服务器写入 <code style={{ color: '#4ade80', background: 'rgba(34,197,94,0.08)', padding: '1px 4px', borderRadius: 3, fontSize: 9 }}>~/.aether/probe.sh</code>，轻量监控脚本。
+                将在服务器写入 <code style={{ color: '#4ade80', background: 'rgba(34,197,94,0.08)', padding: '1px 4px', borderRadius: 0, fontSize: 9 }}>~/.aether/probe.sh</code>，轻量监控脚本。
               </div>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
                 {['✅ 纯 Shell，读取 /proc 文件系统', '✅ 无需安装任何软件或依赖', '✅ 不修改系统配置，不常驻后台', '✅ 断开连接后自动停止采集'].map(t => (
@@ -225,8 +225,8 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 8, marginTop: 2 }}>
-                <button onClick={() => setShowConfirm(false)} style={{ flex: 1, padding: '7px 0', borderRadius: 7, border: '1px solid rgba(255,255,255,0.08)', background: 'transparent', color: '#64748b', fontSize: 11, cursor: 'pointer' }}>取消</button>
-                <button onClick={handleConfirm} disabled={enabling} style={{ flex: 1, padding: '7px 0', borderRadius: 7, border: '1px solid rgba(34,197,94,0.5)', background: enabling ? 'rgba(34,197,94,0.05)' : 'rgba(34,197,94,0.15)', color: enabling ? '#64748b' : '#22c55e', fontSize: 11, fontWeight: 700, cursor: enabling ? 'default' : 'pointer' }}>
+                <button onClick={() => setShowConfirm(false)} style={{ flex: 1, padding: '7px 0', borderRadius: 0, border: '1px solid rgba(255,255,255,0.08)', background: 'transparent', color: '#64748b', fontSize: 11, cursor: 'pointer' }}>取消</button>
+                <button onClick={handleConfirm} disabled={enabling} style={{ flex: 1, padding: '7px 0', borderRadius: 0, border: '1px solid rgba(34,197,94,0.5)', background: enabling ? 'rgba(34,197,94,0.05)' : 'rgba(34,197,94,0.15)', color: enabling ? '#64748b' : '#22c55e', fontSize: 11, fontWeight: 700, cursor: enabling ? 'default' : 'pointer' }}>
                   {enabling ? '注入中...' : '确认开启'}
                 </button>
               </div>
@@ -265,8 +265,8 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
           )}
         </div>
         <div style={{ display: 'flex', gap: 5, marginBottom: 6 }}>
-          <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#22c55e', fontWeight: 700 }}>{osParts[0]}</span>
-          <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 4, background: 'rgba(255,255,255,0.06)', color: '#94a3b8', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{info.os?.replace(osParts[0], '').trim()}</span>
+          <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 0, background: 'rgba(34,197,94,0.12)', border: '1px solid rgba(34,197,94,0.3)', color: '#22c55e', fontWeight: 700 }}>{osParts[0]}</span>
+          <span style={{ fontSize: 10, padding: '2px 8px', borderRadius: 0, background: 'rgba(255,255,255,0.06)', color: '#94a3b8', flex: 1, overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{info.os?.replace(osParts[0], '').trim()}</span>
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4px 8px' }}>
           <div style={{ fontSize: 11, color: '#64748b' }}>时区 <span style={{ color: '#22c55e', fontFamily: 'var(--font-mono)', fontSize: 10 }}>{info.timezone}</span></div>
@@ -306,7 +306,7 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
               { dot: '#64748b', label: '缓存', val: fmem(info.memCache) },
               { dot: '#22c55e', label: '空闲', val: fmem(info.memFree) },
             ].map(({ dot, label, val }) => (
-              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.03)', borderRadius: 6, padding: '4px 8px' }}>
+              <div key={label} style={{ display: 'flex', alignItems: 'center', gap: 6, background: 'rgba(255,255,255,0.03)', borderRadius: 0, padding: '4px 8px' }}>
                 <span style={{ width: 7, height: 7, borderRadius: '50%', background: dot, flexShrink: 0 }} />
                 <span style={{ fontSize: 11, color: '#64748b', flex: 1 }}>{label}</span>
                 <span style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color: '#e2e8f0', fontWeight: 600 }}>{val}</span>
@@ -357,7 +357,7 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
           <span style={{ width: 8, height: 8, borderRadius: '50%', background: '#22c55e', marginRight: 5 }} />
           <span style={{ fontSize: 11, color: '#94a3b8', flex: 1, fontFamily: 'var(--font-mono)' }}>/ ({info.diskDevice})</span>
           <span style={{ fontSize: 10, color: '#64748b', marginRight: 4 }}>类型</span>
-          <span style={{ fontSize: 10, background: '#ca8a04', color: '#fef9c3', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>{info.diskType}</span>
+          <span style={{ fontSize: 10, background: '#ca8a04', color: '#fef9c3', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>{info.diskType}</span>
         </div>
         {/* IO speeds */}
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 6, marginBottom: 7 }}>
@@ -365,7 +365,7 @@ export default function ProbePanel({ sessionId, addToast, enabled, onEnable }) {
             { label: '读/s', val: fspeed(info.diskReadSpeed), color: '#22c55e' },
             { label: '写/s', val: fspeed(info.diskWriteSpeed), color: '#f97316' },
           ].map(({ label, val, color }) => (
-            <div key={label} style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 6, padding: '5px 8px' }}>
+            <div key={label} style={{ background: 'rgba(255,255,255,0.03)', borderRadius: 0, padding: '5px 8px' }}>
               <div style={{ fontSize: 10, color: '#64748b', marginBottom: 2 }}>{label}</div>
               <div style={{ fontSize: 12, fontFamily: 'var(--font-mono)', color, fontWeight: 700 }}>{val}</div>
             </div>

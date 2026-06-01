@@ -477,7 +477,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                     style={{ 
                       width: 96, 
                       height: 96, 
-                      borderRadius: 24, 
+                      borderRadius: 0, 
                       boxShadow: '0 12px 28px rgba(0, 0, 0, 0.25)',
                       border: '1px solid var(--border-light)'
                     }}
@@ -505,7 +505,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                           style={{ 
                             background: downloadProgress >= 0 ? '#1e3a8a' : '#065f46', 
                             color: downloadProgress >= 0 ? '#93c5fd' : '#34d399', 
-                            borderRadius: 12, 
+                            borderRadius: 0, 
                             padding: '2px 8px', 
                             fontSize: 12, 
                             fontWeight: 600,
@@ -550,7 +550,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                       background: 'var(--bg-2)', 
                       color: 'var(--text-3)', 
                       border: '1px solid var(--border)', 
-                      borderRadius: 8, 
+                      borderRadius: 0, 
                       padding: '6px 16px', 
                       fontSize: 13, 
                       fontWeight: 500,
@@ -651,7 +651,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                           display: 'flex', alignItems: 'flex-start', gap: 14, padding: '14px 16px',
                           background: pingProtocol === opt.id ? 'rgba(34,197,94,0.06)' : 'var(--bg-2)',
                           border: `1px solid ${pingProtocol === opt.id ? 'rgba(34,197,94,0.4)' : 'var(--border)'}`,
-                          borderRadius: 10, cursor: 'pointer', transition: 'all 0.15s',
+                          borderRadius: 0, cursor: 'pointer', transition: 'all 0.15s',
                         }}
                       >
                         <div style={{
@@ -665,14 +665,14 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         <div style={{ flex: 1 }}>
                           <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
                             <span style={{ fontSize: 14, fontWeight: 600, color: 'var(--text-1)' }}>{opt.label}</span>
-                            {opt.tag && <span style={{ fontSize: 10, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.4)', color: '#22c55e', padding: '1px 6px', borderRadius: 4, fontWeight: 700 }}>{opt.tag}</span>}
+                            {opt.tag && <span style={{ fontSize: 10, background: 'rgba(34,197,94,0.15)', border: '1px solid rgba(34,197,94,0.4)', color: '#22c55e', padding: '1px 6px', borderRadius: 0, fontWeight: 700 }}>{opt.tag}</span>}
                           </div>
                           <div style={{ fontSize: 12, color: 'var(--text-4)', marginTop: 3 }}>{opt.desc}</div>
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div style={{ marginTop: 12, padding: '10px 14px', background: 'var(--bg-2)', borderRadius: 8, fontSize: 12, color: 'var(--text-4)', lineHeight: 1.7, border: '1px solid var(--border-light)' }}>
+                  <div style={{ marginTop: 12, padding: '10px 14px', background: 'var(--bg-2)', borderRadius: 0, fontSize: 12, color: 'var(--text-4)', lineHeight: 1.7, border: '1px solid var(--border-light)' }}>
                     💡 <strong style={{ color: 'var(--text-3)' }}>提示：</strong>{t.network.tip}
                   </div>
                 </div>
@@ -690,7 +690,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                             key={s}
                             onClick={() => { setProbeInterval(s); localStorage.setItem('probeInterval', String(s)); }}
                             style={{
-                              padding: '4px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: '1px solid',
+                              padding: '4px 12px', borderRadius: 0, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: '1px solid',
                               borderColor: probeInterval === s ? '#22c55e' : 'var(--border)',
                               background: probeInterval === s ? 'rgba(34,197,94,0.1)' : 'var(--bg-3)',
                               color: probeInterval === s ? '#22c55e' : 'var(--text-3)',
@@ -712,7 +712,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                               window.dispatchEvent(new Event('pingIntervalChanged'));
                             }}
                             style={{
-                              padding: '4px 12px', borderRadius: 6, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: '1px solid',
+                              padding: '4px 12px', borderRadius: 0, fontSize: 12, fontWeight: 600, cursor: 'pointer', border: '1px solid',
                               borderColor: pingInterval === s ? '#22c55e' : 'var(--border)',
                               background: pingInterval === s ? 'rgba(34,197,94,0.1)' : 'var(--bg-3)',
                               color: pingInterval === s ? '#22c55e' : 'var(--text-3)',
@@ -788,7 +788,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         style={{ 
                           width: 40, height: 24, 
                           background: useCustomAccent ? 'var(--green)' : 'var(--bg-4)', 
-                          borderRadius: 12, position: 'relative', cursor: 'pointer',
+                          borderRadius: 0, position: 'relative', cursor: 'pointer',
                           transition: 'background 0.2s ease',
                           border: '1px solid var(--border)'
                         }}
@@ -830,7 +830,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         style={{ 
                           fontFamily: 'var(--font-mono)', fontSize: 12, 
                           color: listeningKey === 'copy' ? 'var(--green)' : 'var(--text-4)', 
-                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 4, cursor: 'pointer',
+                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 0, cursor: 'pointer',
                           border: listeningKey === 'copy' ? '1px solid var(--green)' : '1px solid var(--border)',
                           transition: 'var(--transition)'
                         }}
@@ -846,7 +846,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         style={{ 
                           fontFamily: 'var(--font-mono)', fontSize: 12, 
                           color: listeningKey === 'paste' ? 'var(--green)' : 'var(--text-4)', 
-                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 4, cursor: 'pointer',
+                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 0, cursor: 'pointer',
                           border: listeningKey === 'paste' ? '1px solid var(--green)' : '1px solid var(--border)',
                           transition: 'var(--transition)'
                         }}
@@ -862,7 +862,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         style={{ 
                           fontFamily: 'var(--font-mono)', fontSize: 12, 
                           color: listeningKey === 'clear' ? 'var(--green)' : 'var(--text-4)', 
-                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 4, cursor: 'pointer',
+                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 0, cursor: 'pointer',
                           border: listeningKey === 'clear' ? '1px solid var(--green)' : '1px solid var(--border)',
                           transition: 'var(--transition)'
                         }}
@@ -878,7 +878,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                         style={{ 
                           fontFamily: 'var(--font-mono)', fontSize: 12, 
                           color: listeningKey === 'newTab' ? 'var(--green)' : 'var(--text-4)', 
-                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 4, cursor: 'pointer',
+                          background: 'var(--bg-1)', padding: '4px 12px', borderRadius: 0, cursor: 'pointer',
                           border: listeningKey === 'newTab' ? '1px solid var(--green)' : '1px solid var(--border)',
                           transition: 'var(--transition)'
                         }}
@@ -897,7 +897,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
               <div style={{ display: 'flex', flexDirection: 'column', gap: 24, maxWidth: 600 }}>
                 <div style={{ background: 'var(--bg-2)', padding: 24, borderRadius: 'var(--radius-md)', border: '1px solid var(--border)' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: 12, marginBottom: 20 }}>
-                    <div style={{ width: 40, height: 40, borderRadius: 8, background: 'var(--bg-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>☁️</div>
+                    <div style={{ width: 40, height: 40, borderRadius: 0, background: 'var(--bg-3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 20 }}>☁️</div>
                     <div>
                       <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--text-1)' }}>WebDAV 配置</div>
                       <div style={{ fontSize: 12, color: 'var(--text-4)' }}>配置 WebDAV 端点用于加密同步服务器列表</div>
@@ -996,7 +996,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
                   <div style={{ fontSize: 12, color: 'var(--text-3)', marginBottom: 20 }}>同步所有配置，全程 AES-256 高强加密</div>
                   
                   {isConfigured && (
-                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 8, marginBottom: 20, color: 'var(--green)', fontSize: 13 }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '10px 14px', background: 'rgba(34,197,94,0.1)', border: '1px solid rgba(34,197,94,0.3)', borderRadius: 0, marginBottom: 20, color: 'var(--green)', fontSize: 13 }}>
                       <span>✨</span> <span><strong>已开启自动云端备份：</strong>当您添加、编辑、删除服务器或修改配置时，后台将静默保存至云端。</span>
                     </div>
                   )}
