@@ -80,7 +80,7 @@ func measureLatency(host string, port int) (int64, bool) {
 
 // PingServer returns the latency to the SSH port.
 func PingServer(host string, port int) map[string]interface{} {
-	const samples = 2
+	const samples = 1
 	var best int64 = -1
 	var anyOnline bool
 

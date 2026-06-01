@@ -36,11 +36,11 @@ export default function App() {
   // ── 新增主页仪表盘状态 ──────────────────────────────────
   const [recentServers, setRecentServers] = useState([]);
   const [isRefreshingPing, setIsRefreshingPing] = useState(false);
-  const [pingInterval, setPingInterval] = useState(parseInt(localStorage.getItem('pingInterval') || '2', 10));
+  const [pingInterval, setPingInterval] = useState(parseInt(localStorage.getItem('pingInterval') || '30', 10));
 
   useEffect(() => {
     const handler = () => {
-      setPingInterval(parseInt(localStorage.getItem('pingInterval') || '2', 10));
+      setPingInterval(parseInt(localStorage.getItem('pingInterval') || '30', 10));
     };
     window.addEventListener('pingIntervalChanged', handler);
     return () => window.removeEventListener('pingIntervalChanged', handler);

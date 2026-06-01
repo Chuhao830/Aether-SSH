@@ -223,7 +223,7 @@ export default function SettingsModal({ onClose, addToast, onRestored }) {
   // Network/Ping state
   const [pingProtocol, setPingProtocol] = useState(localStorage.getItem('pingProtocol') || 'ssh');
   const [probeInterval, setProbeInterval] = useState(parseInt(localStorage.getItem('probeInterval') || '5', 10));
-  const [pingInterval, setPingInterval] = useState(parseInt(localStorage.getItem('pingInterval') || '2', 10));
+  const [pingInterval, setPingInterval] = useState(parseInt(localStorage.getItem('pingInterval') || '30', 10));
 
   // Appearance state
   const [themeMode, setThemeMode] = useState(localStorage.getItem('themeMode') || 'dark');
